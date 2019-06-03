@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		
+		
+<script src="js/jquery-3.3.1.min.js"></script>		
+ <script type="text/javascript">  
+
+var can;
+var ctx;
+window.onload = function(){
+	can = document.getElementById("can");  
+	ctx = can.getContext("2d"); 
+	createBlock(50,50);//初始位置
+	can.onmousedown = function(ev){  
+	    var e = ev||event;  
+	    var x = e.clientX;  
+	    var y = e.clientY;  
+	    drag(x,y);  
+	}; 
+}
+//createBlock(50,50);
+//创建圆滑块  
+function createBlock(a,b){  
+	ctx.beginPath();
+    ctx.fillStyle = "red";  
+    ctx.arc(a,b,30,0,Math.PI*2);  
+    ctx.fill();  
+}  
+//鼠标按下，将鼠标按下坐标保存在x,y中  
+ 
+//拖拽函数  
+function drag(x,y){  
+    // 按下鼠标判断鼠标位置是否在圆上，当画布上有多个路径时，isPointInPath只能判断最后那一个绘制的路径  
+    if(ctx.isPointInPath(x,y)){  
+        //路径正确，鼠标移动事件  
+        can.onmousemove = function(ev){  
+            var e = ev||event;  
+            var ax = e.clientX;  
+            var ay = e.clientY;  
+            //鼠标移动每一帧都清楚画布内容，然后重新画圆  
+            ctx.clearRect(0,0,can.width,can.height);  
+            createBlock(ax,ay);  
+        };  
+        //鼠标移开事件  
+        can.onmouseup = function(){  
+            can.onmousemove = null;  
+            can.onmouseup = null;  
+        };  
+    };  
+}  
+</script>  	
+		
+	</head>
+	<body>
+		
+		<canvas id="can" width="400" height="400"></canvas> 
+	</body>
+</html>

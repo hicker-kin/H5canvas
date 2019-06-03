@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+		
+    <body>
+    	<span class="filter-title">Brightness</span>
+		<img style="-webkit-filter: brightness({{filterBrightness.qty}}); filter: brightness({{filterBrightness.qty}});"
+			 src="https://www.bestagencies.com/wp-content/themes/bestagencies/img/filterimage.jpg?x75517" alt="">
+		<input name="brightness" type="range" min="0.1" max="10" step="0.1" ng-model="filterBrightness.qty" />
+		<input class="bw_input" type="number" ng-model="filterBrightness.qty" />
+		<pre class="code">-webkit-filter: brightness({{filterBrightness.qty}});
+			filter: brightness({{filterBrightness.qty}});</pre>
+    	
+    	<br/><br/><br/><br/>
+        <div id='jtDiv' style="text-align:left|middle">
+            缩小<input id='scaleSlider' type='range' min='0.5' max='1.5' step='0.1' value='1.0'/>放大 <br>
+            <button onclick="rotateImg('right')">顺时针</button>
+            <button onclick="getSrcImg()">原图</button>
+            <button onclick="rotateImg('left')">逆时针</button> <br>
+            变暗<input id='factorSlider' type='range' min='0.1' max='1.0' step='0.1' value='0.8'/>变亮
+        </div>
+        <img 
+            id="Img" 
+            step="0" 
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496916906887&di=0b8da662a9f4246a702d22de2512ba0b&imgtype=0&src=http%3A%2F%2Fmedia-cdn.tripadvisor.com%2Fmedia%2Fphoto-o%2F05%2F2e%2F1a%2F83%2Fgetlstd-property-photo.jpg" 
+            style="display: block; transform: rotate(0deg); margin: 10px auto;filter: brightness(0.8);" 
+        />
+    </body>
+
+    <script type="text/javascript">
+        // Get the image from id
+        var img = document.getElementById('Img');
+        var width = img.width;
+        var height = img.height;
+        var step = parseInt(img.getAttribute('step'));
+
+        // Zoom in or out
+        var scaleSlider = document.getElementById('scaleSlider'),
+            scale = 1.0,
+            MINIMUM_SCALE = 0.5,
+            MAXIMUM_SCALE = 1.5;
+
+        scaleSlider.onchange = function(e) {
+            scale = e.target.value;
+            if (scale < MINIMUM_SCALE) { 
+                scale = MINIMUM_SCALE;
+            } else if (scale > MAXIMUM_SCALE) {
+                scale = MAXIMUM_SCALE;
+            }
+            zoomImg(scale);
+        };
+
+        // Brightness 
+        var factorSlider = document.getElementById('factorSlider'),
+            factor = 0.8,
+            MINIMUM_FACTOR = 0.1,
+            MAXIMUM_FACTOR = 1.0;
+        factorSlider.onchange = function(e) {
+            factor = e.target.value;
+            if (factor < MINIMUM_FACTOR) {
+                factor = MINIMUM_FACTOR;
+            } else if (factor > MAXIMUM_FACTOR) {
+                factor = MAXIMUM_FACTOR;
+            }
+            brightenImg(factor);
+        }
+
+
+        function getSrcImg() {
+            img.width = width;
+            img.height = height;
+            img.style.transform = "rotate(0deg)";
+            img.style.filter = "brightness(0.8)";
+            scaleSlider.value = 1.0;
+            factorSlider.value = 0.8;
+        }
+
+
+        function zoomImg(scale) {
+            sw = width * scale,
+            sh = height * scale;
+            img.width = sw;
+            img.height = sh;
+        }
+
+
+        function rotateImg(direction) {
+            //最小与最大旋转方向，图片旋转4次后回到原方向
+            var min_step = 0;
+            var max_step = 3;
+            if (step === null) {
+                step = min_step;
+            }
+            if (direction == 'right') {
+                step++;
+                //旋转到原位置，即超过最大值
+                if (step > max_step) {
+                    step = min_step;
+                }
+            } else {
+                step--;
+                if (step < min_step) {
+                    step = max_step;
+                }
+            }
+            img.setAttribute('step', step);
+            //旋转角度以弧度值为参数
+            var degree = step * 90;
+            img.style.transform = "rotate(" + degree + "deg";
+        }
+
+        function brightenImg(factor){
+            img.style.filter = "brightness(" + factor + ")";
+        }
+    </script>
+</html>

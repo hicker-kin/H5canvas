@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>DW调色板</title>
+<script type="text/javascript" language="javascript">
+var ColorHex=new Array('00','33','66','99','CC','FF')
+var SpColorHex=new Array('FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF')
+var current=null
+function getEvent()
+{
+  if(document.all)
+  {
+  return window.event;//如果是ie
+  }
+  func=getEvent.caller;
+  while(func!=null)
+  {
+    var arg0=func.arguments[0];
+    if(arg0)
+    {
+      if((arg0.constructor==Event || arg0.constructor ==MouseEvent)||(typeof(arg0)=="object" && arg0.preventDefault && arg0.stopPropagation))
+      {
+      return arg0;
+      }
+    }
+    func=func.caller;
+  }
+  return null;
+}
+function intocolor()
+{
+  var colorTable=''
+  for (i=0;i<2;i++)  //循环2部分
+  {
+    for (j=0;j<6;j++) //循环6行
+    {
+      colorTable=colorTable+'<tr height=12>'
+      for (k=0;k<3;k++)
+      {
+        for (l=0;l<6;l++)
+        {
+          colorTable=colorTable+'<td width=11 onclick = "doclick()" style="background-color:#'+ColorHex[k+i*3]+ColorHex[l]+ColorHex[j]+'">'
+        }
+      }
+    }
+  }
+  colorTable='<table width=217 border="0" cellspacing="0" cellpadding="0" style="border:1px #000000 solid;border-bottom:none;border-collapse: collapse" bordercolor="000000">'
+      +'<tr height=30><td colspan=21 bgcolor=#cccccc>'
+      +'<table cellpadding="0" cellspacing="1" border="0" style="border-collapse: collapse">'
+      +'<tr><td width="3"><td>当前色:</td><td><input type="text" name="DisColor" id="DisColor" size="6" disabled style="border:solid 1px #000000;background-color:#FFFFFF"></td>'
+      +'<td width="3"><td><input type="text" name="HexColor" id="HexColor" size="7" style="border:inset 1px;font-family:Arial;" value="#FFFFFF"></td></tr></table></td></table>'
+      +'<table border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse" bordercolor="000000" style="cursor:hand;">'
+      +colorTable+'</table>';
+  colorpanel.innerHTML=colorTable
+}
+/*function doOver() {
+  var evt=getEvent();
+  var element=evt.srcElement || evt.target;
+  var DisColor=document.getElementById("DisColor");
+  var HexColor=document.getElementById("HexColor");
+  if ((element.tagName=="TD") && (current!=element)) {
+    if (current!=null){
+      current.style.backgroundColor = current._background
+    }
+    element._background = element.style.backgroundColor
+    DisColor.style.backgroundColor = rgbToHex(element.style.backgroundColor)
+    HexColor.value = rgbToHex(element.style.backgroundColor)
+    element.style.backgroundColor = "white"
+    current = element
+  }
+}*/
+function rgbToHex(aa)
+{
+  if(aa.indexOf("rgb") != -1)
+  {
+    aa=aa.replace("rgb(","")
+    aa=aa.replace(")","")
+    aa=aa.split(",")
+    r=parseInt(aa[0]);
+    g=parseInt(aa[1]);
+    b=parseInt(aa[2]);
+    r = r.toString(16);
+    if (r.length == 1) { r = '0' + r; }
+    g = g.toString(16);
+    if (g.length == 1) { g = '0' + g; }
+    b = b.toString(16);
+    if (b.length == 1) { b = '0' + b; }
+    return ("#" + r + g + b).toUpperCase();
+  }
+  else
+  {
+    return aa;
+  }
+}
+/*function doOut() {
+  if (current!=null) current.style.backgroundColor = current._background;
+}*/
+function doclick(){
+  var evt=getEvent();
+  var element=evt.srcElement || evt.target;
+  if (element.tagName=="TD"){
+  	element._background = element.style.backgroundColor;
+    var bg=rgbToHex(element._background);
+    document.getElementById("orange").value=bg;
+    alert("选取颜色: "+bg);
+    return bg;
+  }
+}
+</script>
+</head>
+<body onload="intocolor()">
+  <div id="colorpanel">
+  </div>
+  <table width=217 border="1" cellspacing="0" cellpadding="0" style="border:1px #000000 solid;border-bottom:none;border-collapse: collapse" bordercolor="000000">
+  <tr height=30>
+    <td colspan=21 bgcolor=#cccccc>
+      <table cellpadding="0" cellspacing="1" border="0" style="border-collapse: collapse">
+        <tr>
+          <td>所选色:</td>
+          <td><input id="orange" type="text" value="" size="20" /></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+</body>
+</html>

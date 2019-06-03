@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			table{ 
+				border-collapse:collapse; 	
+				text-align: center;
+			} 	
+			table td { 		
+				border-top: 0;		
+				border-right: 1px solid red; 		
+				border-bottom: 1px solid red; 		
+				border-left: 0;  
+				height: 20px;	
+				word-wrap:break-word; /*自动换行*/
+				word-break:break-all;
+				table-layout：fixed;
+			}  
+				
+			/* css3样式，获取表格的最后一行 	
+			table tr:last-child td{		
+				border-bottom: 0; 	
+			}
+			
+			 css3样式，获取表格的最后一列	
+			table tr td:last-child{		
+				border-right: 0; 	
+			}*/
+			.cs1{
+				padding: 0px;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.litcs{	/*小标题样式*/	
+				border-right: 0; 
+				font-size: 14px;
+				height: 16px;	
+			}
+			
+			.endcs{	/*内容样式*/		
+				border-right: 0; 	
+				border-bottom: 0; 
+				font-size: 18px;	
+				height: 34px;		
+			}
+			
+			.titleCls{
+				font-size: 20px;
+			}
+			
+		</style>
+		<script>
+			function copy(){
+				var ret=window.clipboardData.setData("Text", "js复制到剪切板");//“Text”表明作为文本
+				if(ret){	// update by baoyx on 20151116 解决禅道任务 7297： 复制条码时点击【不允许】，系统提示的信息错误。
+					alert("选中的条码号已复制到剪切板！");
+				}else{
+					alert("选中的条码号复制到剪切板失败！");
+				}
+			}
+			//copy();
+			
+			function getChb(){
+				var counter=0
+				var numbervalue=""
+				if (document.getElementsByName("checkbox").length>0){
+					for(var i=0;i<document.getElementsByName("checkbox").length;i++){
+					   if(document.getElementsByName("checkbox")[i].checked){
+					   		counter=counter+1;
+					   		numbervalue = document.getElementsByName("checkbox")[i].value +"&" + numbervalue;
+				       }
+				    }
+				  }
+			    alert("选择记录的条数是"+counter, "选中的值是：");
+			    alert(unescape("%u672A%u67E5%u8BE2%u5230%u76F8%u5173%u6570%u636E"));
+			    alert(numbervalue)
+			}
+			
+		</script>
+		
+		
+	</head>
+	<body>
+		<div style="width: 600px;height: 500px; border: 0px solid red;">
+			<input name = "checkbox" type="checkbox" value="aaa" />
+			<input name = "checkbox" type="checkbox" value="bbb"/>
+			<input name = "checkbox" type="checkbox" value="ccc"/>
+			<input name = "aa" type="button" onclick="getChb()" value="记录复选框数据" />
+ 		<!--<table style="width: 500px;height: 400px; border: 3px solid red; margin: 0 auto; margin-top: 8%;">
+ 			<tr>
+ 				<td colspan="3" > <font size="5px" color="#FF00FF">标题一</font> </td>
+ 			</tr>
+ 			
+ 			
+ 			<tr>
+ 				
+ 				<td> 
+ 					<table class="cs1">
+ 						<tr>
+ 							<td class="litcs">aaa</td>
+ 						</tr>
+ 						<tr>
+ 							<td class="endcs">啊啊aaasass阿撒旦撒飒飒飒飒飒飒飒飒dadasdaasad啊</td>
+ 						</tr>
+ 					</table>
+ 				</td>
+ 				
+ 				<td> 
+ 					<table class="cs1">
+ 						<tr>
+ 							<td class="litcs">bbb</td>
+ 						</tr>
+ 						<tr>
+ 							<td class="endcs">不不不</td>
+ 						</tr>
+ 					</table>
+ 				</td>
+ 				
+ 				<td> 
+ 					<table class="cs1">
+ 						<tr>
+ 							<td class="litcs">ccc</td>
+ 						</tr>
+ 						<tr>
+ 							<td class="endcs">擦擦擦</td>
+ 						</tr>
+ 					</table>
+ 				</td>
+ 			
+ 			</tr>
+ 			
+ 			
+ 			<tr align="center">
+ 				<td> 
+ 					<table class="cs1">
+ 						<tr>
+ 							<td class="litcs">ggg</td>
+ 						</tr>
+ 						<tr>
+ 							<td class="endcs">滚滚滚</td>
+ 						</tr>
+ 					</table>
+ 				</td>
+ 				<td> 
+ 					<table class="cs1">
+ 						<tr>
+ 							<td class="litcs">ggg</td>
+ 						</tr>
+ 						<tr>
+ 							<td class="endcs">滚滚滚</td>
+ 						</tr>
+ 					</table>
+ 				</td>
+ 			</tr>	
+ 			
+ 			
+ 			<tr>
+ 				<td colspan="3" align="center"> <font size="5px" color="#0000FF">标题二</font> </td>
+ 			</tr>
+ 			
+ 			
+ 			<tr align="center">
+ 				<td> 
+ 					<table class="cs1">
+ 						<tr>
+ 							<td class="litcs">ggg</td>
+ 						</tr>
+ 						<tr>
+ 							<td class="endcs">滚滚滚</td>
+ 						</tr>
+ 					</table>
+ 				</td>
+ 				<td> 
+ 					<table class="cs1">
+ 						<tr>
+ 							<td class="litcs">ggg</td>
+ 						</tr>
+ 						<tr>
+ 							<td class="endcs">滚滚滚</td>
+ 						</tr>
+ 					</table>
+ 				</td>
+ 			</tr>-->	
+ 			
+ 		</table>
+ 		
+ 		<hr />
+ 		<hr />
+ 		
+ 		<table class = 'zzptcls' style="border: 3px solid red;"><tr class = "titleCls"><td colspan = "4">公安部吸贩毒人员</td></tr><tr><td><table class="cs1"><tr><td class = "litcs">姓名</td></tr><tr><td class="endcs">林洪海</td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">性别</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">身份证</td></tr><tr><td class="endcs">653124197009012668</td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">生日</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td><table class="cs1"><tr><td class = "litcs">犯罪事实</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">查获单位</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">查获地点</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">初次查获时间</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td><table class="cs1"><tr><td class = "litcs">别名绰号</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">户籍所在地</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">户籍所在地详址</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">实际居住地详址</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr class = "titleCls"><td colspan = "4">公安部常住人口</td></tr><tr><td><table class="cs1"><tr><td class = "litcs">姓名</td></tr><tr><td class="endcs">林洪海</td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">性别</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">身份证号</td></tr><tr><td class="endcs">653124197009012668</td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">民族</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td><table class="cs1"><tr><td class = "litcs">出生日期</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">文化程度</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">户口所在地</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">籍贯省市县</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td><table class="cs1"><tr><td class = "litcs">兵役情况</td></tr><tr><td class="endcs"></td></tr></table></td><td colspan = "3"><table class="cs1"><tr><td class = "litcs">住址详址</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr class = "titleCls"><td colspan = "4">公安部驾驶人口</td></tr><tr><td><table class="cs1"><tr><td class = "litcs">姓名</td></tr><tr><td class="endcs">林洪海</td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">性别</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">生日</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">驾驶证号</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td><table class="cs1"><tr><td class = "litcs">初次领证日期</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">档案编号</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">登记住址详址</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">发证机关</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td><table class="cs1"><tr><td class = "litcs">有效起始日期</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">有效终止日期</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">状态</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">联系电话</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr class = "titleCls"><td colspan = "4">公安部在逃人员</td></tr><tr><td><table class="cs1"><tr><td class = "litcs">案件类别</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">案件编号</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">督捕级别</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">国内通缉编号</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td><table class="cs1"><tr><td class = "litcs">姓名</td></tr><tr><td class="endcs">林洪海</td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">性别</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">身份证号</td></tr><tr><td class="endcs">653124197009012668</td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">出生日期</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td><table class="cs1"><tr><td class = "litcs">立案单位名称 </td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">立案单位省市</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">联系人电话</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">身高</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td><table class="cs1"><tr><td class = "litcs">逃跑日期</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">户籍地</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">现住址</td></tr><tr><td class="endcs"></td></tr></table></td><td><table class="cs1"><tr><td class = "litcs">现住详细地址</td></tr><tr><td class="endcs"></td></tr></table></td></tr><tr><td colspan = "4"><table class="cs1"><tr><td class = "litcs">简要案情</td></tr><tr><td class="endcs"></td></tr></table></td></tr></table>
+
+ 		
+		
+ 	</div>
+	</body>
+</html>

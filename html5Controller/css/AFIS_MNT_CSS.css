@@ -1,0 +1,133 @@
+/*捺印指纹*/
+.cvsCont_AFIS_Css{
+	text-align:center;
+	width:100%;
+	height:640px;
+	border:solid 4px #6495ED;
+}
+
+.character{
+	margin:0px 0px 0px -640px;
+}
+
+.afis_class{
+	margin:0px;
+}
+
+#characterIconDivId{
+	width:168px;
+	height:100px;
+	margin:0px;
+	padding:0px;
+}
+
+.afis_button_class{
+	width:38px; 
+	height:38px;
+	float:left;
+	margin:2px;
+	padding:0px;
+	background:no-repeat;
+	border-style:solid;
+	border-width:2px;
+	border-color:#808080;/*置灰颜色#D3D3D3;*/
+	background-size:34px;
+	outline:none;
+}
+
+
+/*图标div*/
+#typeIconDivId1{
+	height:84px;
+}
+#typeIconDivId2{
+	height:84px;
+}
+#ridgeIconDivId{
+	height:66px;
+    text-align:left;
+}
+#auxiliaryIconDivId{
+	height:84px;
+}
+
+/*纹型图标*/
+#finerTpye1{
+	background-image:url(../img/arc.jpg);
+}
+#finerTpye2{
+	background-image:url(../img/L_loop.jpg);
+}
+#finerTpye3{
+	background-image:url(../img/R_loop.jpg);
+}
+#finerTpye4{
+	background-image:url(../img/whorl.jpg);
+}
+#finerTpye0{
+	background-image:url(../img/sundry.jpg);
+}
+/*第二组*/
+#_finerTpye1{
+	background-image:url(../img/arc.jpg);
+}
+#_finerTpye2{
+	background-image:url(../img/L_loop.jpg);
+}
+#_finerTpye3{
+	background-image:url(../img/R_loop.jpg);
+}
+#_finerTpye4{
+	background-image:url(../img/whorl.jpg);
+}
+#_finerTpye0{
+	background-image:url(../img/sundry.jpg);
+}
+
+/*斗型*/
+#whorl10{
+	background-image:url(../img/N_whorl.jpg);
+}
+#whorl11{
+	background-image:url(../img/L_whorl.jpg);
+}
+#whorl12{
+	background-image:url(../img/R_whorl.jpg);
+}
+#whorl20{
+	background-image:url(../img/N_whorl.jpg);
+}
+#whorl21{
+	background-image:url(../img/L_whorl.jpg);
+}
+#whorl22{
+	background-image:url(../img/R_whorl.jpg);
+}
+
+/*绘制图标*/
+#drawCenter{
+	background-image:url(../img/center.ico);
+}
+#drawCharacter{
+	background-image:url(../img/character.ico);
+}
+#drawLTri{
+	background-image:url(../img/Ltri.ico);
+}
+#drawRTri{
+	background-image:url(../img/Rtri.ico);
+}
+#drawImptAreaId{
+	background-image:url(../img/imptera.ico);
+}
+#drawDownCen{
+	background-image:url(../img/downCenter.ico);
+}
+#drawFingerDir{
+	background-image:url(../img/fingerDir.ico);
+}
+
+/*保存及辅助图标*/
+#saveMnt{
+	background-image:url(../img/ok.ico);
+}

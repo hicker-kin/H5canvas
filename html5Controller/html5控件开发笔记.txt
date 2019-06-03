@@ -1,0 +1,113 @@
+0.开发原则：尽量减少js文件的计算容量，主要是：空格的使用；递归运算；全局构造函数；全局变量的使用；在使用循环的过程中，尤其注意对死循环的回避！
+1.基本思路：
+每次点击事件后，创建一个canvas。若是单特征，只有一个单特征的画布；多特征时，绘画完后创建一个新画布，为下次绘画创建新画布。
+在以后修改特征时，通过点击图标时获取对应画布【将画布移到最后一层】，获取context上下文，再进行相应操作！
+
+2.主要功能函数：
+创建新画布；
+删除画布；
+双击捕获特征；
+.....
+
+3.存储特征数据格式：
+[
+	画布类型存储的特征类型=====Type:  A:中心，B:细节特征，C:左三角，D:右三角,E:下中心 F:指纹方向
+	//*******画布帧数【顺序】===========count:1,就是第一帧【暂不使用】***********/
+	存储的base64数据==========strBase64：data:image/png;base64,iVBORw0KGg。。。。
+	细节特征数据===============obj：{x0: 396, y0: 213, x1: 299, y1: 239, k: -3.7307692307692326}
+]
+
+var center = [];
+var charac = [];
+var lTri = [];
+var rTri = [];
+var downCenter = [];
+var fingerDir = [];
+
+
+4.编辑控件测试条码号：5301135100002015020178  
+	edit.jsp的L1301【默认显示滚动指纹】L617：secBoard();
+	【personEdit.js L530 --》showDiv（）L814 创建控件】==》L821，822 rfpClick（）绑定点击事件==》showRfp（）左侧列的显示图片，
+	参数依次为：图像显示控件、页面根路径、指位、数据库名、人员编号、dbid、随机数、压缩代码、图像宽度、图像高度、原图大小、压缩图大小
+	ShowAfisPic 显示图像的class文件  以byte数组的形式写出    L632控件显示图片
+	
+	点击绑定的点击事件时，显示编辑控件，加载编辑图片及特征：
+	【rfpClick()===>showEdit_MNT()】 ==>L723显示编辑控件==》showFinger（），L1245：showMNT_OCX（）创建控件，   
+	L726 showEdit_MNT加载特征及显示图像数据【显示图像数据:L744:传递参数【bs64】 eval("document."+ocxname+index+".ImageStream")//base64的字符串；
+	获取特征数据===》》》
+	L751的url是显示特征数据！！！！！！ShowAfisPic的L128将特征数据以数组的形式返回前端的控件】 ； 
+
+5.版本兼容性问题：【经与李博士讨论，第一版以IE11 及 Chrome为准！】
+
+6.关于特征界面的非编辑参数，使用前端传入的方式，在js中解析出。比如指位信息
+
+6.1指纹
+原C++传参：CMntEditor.SetPersonPicMnt(dbid,pid,barcode,pid,index,
+									eval("document."+ocxname+index+".ImageStream"),
+									type,
+									url,//编辑图像特征的链接
+									mnttype,
+									editunit,edituser)
+				
+MntVersion【特征提取版本 A-自动提取 U-自动提取需要人工编辑  E-自动提取已经人工编辑 M-人工提取 O-其他 //  [Feng Jufu 7/18/2012]】，
+width,
+height,
+tcd,
+f_position,
+
+
+6.2未知参数：
+tcd【十指联指纹型】,region【指纹区域】,qualitity【指纹区域】,fort【指纹方向:是0-360的方向吗？】，whorltype【斗型纹旋转方向】，
+
+
+7.注意问题：
+初始化时，编辑特征容器【div】id = "cvsCont"【强制性要求写id及此处对应的名称】 的父级div的宽高理论上要大于640px;
+
+
+8.在规划特征数据布局时，考虑到各个地方电脑分辨率的大小不一致，所以编辑特征的画布大小不指定，而是使用百分比；这样会导致绘制的图形
+	和实际特征位置右偏移【图像居中导致】。所以在实际绘制图像特征数据时，必须考虑偏移量来决定特征的相对位置。
+	
+9.保存特征按钮未获得保存权限时，点击保存按钮不可用！
+
+unsigned char	rp;			//29  指纹纹型
+	// 0-..残缺或不确定或有歧义  
+	// 1-..弓形
+	// 2-..左箕
+	// 3-..右箕
+	// 4-..斗
+	unsigned char	whorltype;	//30  斗型纹旋转方向
+	// 0-不确定
+	// 1-正旋
+	// 2-反旋
+	
+10：数据的传递
+前端：
+	var ids = [1,3,"qin"];
+	var param ="ids="+ids;
+	$.ajax({
+		type:"POST",//数据量大,不可使用get
+		url:"<%=basePath%>exchFind",
+		data:param,
+		traditional:true,
+		async:false,
+		error:function(XMLHttpRequest, textStatus, errorThrown) {
+			alert("特征入库出现异常  = "+errorThrown);
+		},
+		success:function(data){
+			data = data.replace(/^\s+|\s+$/g,"");
+		}
+	})
+//后端对数组参数的接收
+doPost中写：
+String[] id = req.getParameterValues("ids");
+
+
+
+2018/10/23整理结构之需要明确参数：
+
+特征结构：【包括总特征点个数，特征套数，细节特征点个数】
+人：
+
+
+案：
+

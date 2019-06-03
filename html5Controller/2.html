@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+ 
+<title>Javascript 事件</title>
+ 
+<head>
+  <style type="text/css">
+    body {background-color:#eeeeee}
+    div.greenBtn
+    {
+      color:white;
+      background-color:green;
+      width:200px;
+      height:20px;
+      text-align:center;
+      padding-top:20px;
+      padding-bottom:20px;
+    }
+    button.greenBtn
+    {
+      color:white;
+      background-color:green;
+      width:200px;
+      height:50px;
+      text-align:center;
+      border:0px;
+    }
+  </style>
+</head>
+ 
+<body onload="checkCookies()">  <!--页面加载时检测浏览器cookies是否启用-->
+  <h3>（一）点击时改变HTML元素内容</h3>
+  <h4>1.直接改变</h4>
+  <p onclick="this.innerHTML = '谢谢'">请点击文字</p>
+  <h4>2.通过函数改变</h4>
+  <p onclick="changeText(this)">请点击文字</p>
+  <script>
+    function changeText(ele){
+      ele.innerHTML = "谢谢";
+    }
+  </script>
+ 
+  <script>
+  function checkCookies(){
+    if (navigator.cookieEnabled){
+      // alert("已启用 cookie")
+    }else{
+      // alert("未启用 cookie")
+    }
+  }
+  </script>
+ 
+  <h3>（二）onload 和 onunload 事件</h3>
+  <p>
+    onload 和 onunload 事件会在用户进入或离开页面时被触发。<br>
+    onload 事件可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。<br>
+    onload 和 onunload 事件可用于处理 cookie
+  </p>
+ 
+  <h3>（三）onchange事件</h3>
+  <p>请输入英文字符：<input type="text" onchange="toUpper(this)">
+  <p>当您离开输入字段时，会触发将输入文本转换为大写的函数。</p>
+  <script>
+    function toUpper(ele){
+      ele.value = ele.value.toUpperCase();
+    }
+  </script>
+ 
+  <h3>（四）onmouseover 和 onmouseout 事件</h3>
+  <div class="greenBtn" onmouseover="mOver(this)" onmouseout="mOut(this)">
+    把鼠标放在上面
+  </div>
+  <script>
+    function mOver(ele){
+      ele.innerHTML = "谢谢"
+    }
+    function mOut(ele){
+      ele.innerHTML = "把鼠标放在上面"
+    }
+  </script>
+ 
+  <h3>（五）onmousedown、onmouseup 以及 onclick 事件</h3>
+  <button class = "greenBtn" onmousedown="mDown(this)" onmouseup="mUp(this)">鼠标抬起</button>
+  <script>
+    function mDown(ele){
+      ele.innerHTML = "鼠标已按下"
+      ele.style.backgroundColor = "blue"
+    }
+    function mUp(ele){
+      ele.innerHTML = "鼠标抬起"
+      ele.style.backgroundColor = "green"
+    }
+  </script>
+ 
+  <h3>（六）onfocus 事件</h3>
+  <p>当输入框获取焦点时，改变其背景色
+    <input type="text"
+    onfocus = "changeBgColor(this,true)"
+    onblur="changeBgColor(this,false)">
+  </p>
+  <script>
+    function changeBgColor(ele,hasFocus){
+      if(hasFocus){
+        ele.style.backgroundColor = "yellow"
+      }else{
+        ele.style.backgroundColor = "gray"
+      }
+    }
+  </script>
+ 
+ 
+</body>

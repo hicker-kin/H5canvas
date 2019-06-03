@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html>
+ 
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+  <script type="text/javascript" src="js/myAjax.js" ></script>
+<script>
+ 
+myAjax(); 
+function init(){
+chkbox = document.getElementById("cb");
+ 
+}
+ 
+function fun1 () {
+ 
+    chkbox.indeterminate = false;
+ 
+    chkbox.checked = true;
+ 
+}
+ 
+function fun2() {
+ 
+    chkbox.indeterminate = false;
+ 
+    chkbox.checked = false;
+ 
+}
+ 
+function fun3() {
+ 
+    chkbox.indeterminate = true;
+ 
+}
+ 
+function fn4(){
+	var t = 3;
+	function step(t) {
+	  t = t+1;
+	  if (t < 100) {
+	  	//console.log("t=="+1)
+	    window.requestAnimationFrame(step);
+	  }
+	}
+	//调用函数
+	step(t);
+	
+	var obj = new characObj();
+	obj.x0 = 1;
+	obj.y0 = 2;
+	
+	console.log("x0======="+obj.x0);
+	console.log(""+obj);
+	//console.log(obj);
+	//console.dir(obj);
+}
+
+
+var characObj = function (x0,y0,x1,y1,angle,canvasId,c,type,color,r){
+	this.x0 = x0;
+	this.y0 = y0;
+	this.x1 = x1;
+	this.y1 = y1; 
+	this.angle =  angle;
+	this.canvasId = canvasId;
+	this.c = c;//细节特征置信度
+	this.type = type;
+	this.color = color;
+	this.r = r;
+}
+ 
+//fn4();
+ 
+var ddd = function(str){
+return eval("(" + str + ")");
+}
+var jsonFn = function(){
+	
+	var str = '{"rows":[{"ID":0,"登录账号":"admin","登录时间":"\Date(1446772997000)\/","登录地点":"河北石家庄","登录IP":"115.181.15.99"}],"rows2":"333" }';
+	var str2 = { "name": "cxh", "rows":'[{"ID":0,"登录账号":"admin","登录时间":"\Date(1446772997000)\/","登录地点":"河北石家庄","登录IP":"115.181.15.99"}]' };
+	//var obj2 = JSON.parse(str2);//不能直接解析json对象
+	//var obj3 =  str2.parseJSON();
+	console.log(str2.name)//对象直接读
+	console.log(str2.rows)//   [0]==》obj 若给rows的val加引号，则变为字符串
+ 
+	var obj = ddd(str);
+	console.log(obj)//Object {rows: Array[1], rows2: "333"}
+	var rowsObj = obj.rows;
+	console.log(rowsObj)
+	console.log(obj["rows"] == obj.rows)//true  两种写法类似
+	var rows = obj["rows"];//类似于 obj.get(Key)   
+	for(var i = 0; i < rows.length; i++){
+		var ri = rows[i];//ri 是对象
+		for(var k in ri){
+			console.log(k + ": " + ri[k]);//ID: 0       登录账号: admin
+		}
+	}
+	var rows2 = obj["rows2"];
+	console.log(obj.rows2);//333
+}
+ 
+var createFolder = function(){
+	var xmlFld="d:\\testJs\\";
+	var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+  	var fso;
+  	try{
+  		fso = new ActiveXObject("Scripting.FileSystemObject");
+  	}catch(e){
+  		alert("浏览器不支持activexObject!");
+  		return;
+  	}
+  	var fldr = fso.FolderExists(xmlFld);//看文件夹 是否存在
+  	if(!fldr){
+  		fso.CreateFolder(xmlFld);//创建文件夹
+  	}
+}
+ 
+
+function parseXml(strxml){
+	try{//Internet Explorer
+	  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+	  xmlDoc.async="false";
+	  xmlDoc.loadXML(strxml);
+	}catch(e){
+	  try{//Firefox, Mozilla, Opera, etc.
+	  	parser=new DOMParser();
+	  	xmlDoc=parser.parseFromString(strxml,"text/xml");
+	  	console.log(xmlDoc);
+	  }catch(e){
+	  	alert(e.message);
+	  	return;
+	  }
+	}
+}
+
+var strxml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+			+"	<ClientInfo>"
+			+"		<Client_Mac>0-25-64-A3-AA-2C</Client_Mac>"
+			+"		<Client_Ip>127.0.0.1</Client_Ip>"
+			+"		<Client_FingerDll>GALS2000.dll</Client_FingerDll>"
+			+"		<Client_PalmDll>PALM2000.dll</Client_PalmDll>"
+			+"		<Client_GBExist>0</Client_GBExist>"
+			+"		<USB><COUNT>1</COUNT><USB0><USB_VID>046d</USB_VID><USB_PID>c05a</USB_PID></USB0></USB>"
+			+"	</ClientInfo>"; 
+parseXml(strxml);
+createFolder();
+//jsonFn(); 
+</script>
+ 
+</head>
+ 
+<body onload="init()">
+ 
+  <input id="cb" type="checkbox" />
+ 
+  <button onclick="fun1()">选中</button>
+ 
+  <button onclick="fun2()">不选</button>
+ 
+  <button onclick="fun3()">部分选中</button>
+  
+  <img src="img/L_whorl.jpg" width="504" height="293">
+ 
+</body>
+ 
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    <title>指纹控件编辑界面</title>	
+   <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style type="text/css"> 
+	  /* img:{
+	   		float: left;
+	   }*/
+    </style>
+    <script type="text/javascript" src="js/testJson.js" ></script>
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/base64Util.js"></script>
+	<script src="js/drawFingerMnt.js"></script>
+	<script src="js/FingerMnt_Struct.js"></script>
+	<link rel="stylesheet" href="css/AFIS_MNT_CSS.css" />
+	
+	<script type="text/javascript">
+		function testMnt(){
+			var bs64ImgStr = "";
+			var mntJsonData = "";
+			var datatype = 1;//数据类型  0：案，1：人
+			initCvsArg(bs64ImgStr,mntJsonData,datatype);
+		}
+	</script>
+	</head>
+    <body style="margin:0px;" onload="testMnt()">
+    	<div style="text-align: center; width:80%;">
+    		<div id = "afis-mnt-cvsCont" >
+	    	</div>
+    	</div>
+    	<input type="hidden" id="AcenterConId" value="" />
+    	<input type="hidden" id="BcharacterConId" value="" />
+    	<input type="hidden" id="ClTriConId" value="" />
+    	<input type="hidden" id="DrTriConId" value="" />
+    	<input type="hidden" id="EdownCenterConId" value="" />
+    	<input type="hidden" id="FfingerDriConId" value="" />
+        <div id="xycoordinates" style="display:;"></div>
+        <!--<div > 
+        	<img src="img/center.ico" id ="drawCenter" width="40px" height="40px" onclick="drawCenterFn()" 
+        		    title="标注中心" />
+        	<img src="img/character2.ico" id ="drawCharacter" width="40px" height="40px" onclick="drawCharacterFn()" 
+        		    title="细节特征"/>
+        	<img src="img/Ltri.ico" id="drawLTri" width="40px" height="40px" onclick="drawLeftTriFn()" 
+        			title="左三角"/>
+        	<img src="img/Rtri.ico" id="drawRTri" width="40px" height="40px" onclick="drawRightTriFn()" 
+        			title="右三角"/>
+        	<img src="img/downCenter.ico" id="drawDownCen" width="40px" height="40px" onclick="drawDownCenFn()" 
+        			title="下中心"/>
+        	<img src="img/fingerDir.ico" id="drawFingerDir" width="40px" height="40px" onclick="drawFingerDirFn()" 
+        			title="指纹方向"/>
+        	<img src="img/ok.ico" id="save" width="40px" height="40px" onclick="saveMntFn()" 
+        			title="保  存"/>
+        	<img src="" id = "previewImg" />		
+        </div>-->
+    </body>
+</html>

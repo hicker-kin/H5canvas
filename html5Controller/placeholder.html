@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta charset="UTF-8">
+		<title>测试placeholder</title>
+		<script src="js/jquery-1.9.1.js"></script>
+		<script>
+			$(function(){
+			    $('.for_text').click(function(){
+			        $('.text').focus()
+			        $('.for_text').hide();
+			        $('.text').attr("value","123");
+			    })
+			})
+			
+			function fnW(){
+				var bb = $("#text2").val();
+				$('#text1').attr("value","");
+				alert(bb);
+			}
+			
+			
+			(function() {
+			    console.log("我是匿名函数,会自动执行奥!");
+			})();
+
+			
+		</script>
+		<style>
+		.for_text{ position:absolute; cursor:text; margin:5px; color:#999;}
+		.text{ padding:5px;}
+		</style>
+	</head>
+	<body>
+		<form>
+			<label for="text" class="for_text">请输入文本</label>
+			<input type="text" name="text" id="text1" class="text"> </input>
+			<input type="text" id="text2" class="text1"> </input>
+			<button type="button" id = "click" onclick="fnW()"> 点 击 </button>
+		</form>
+		
+	</body>
+</html>
